@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eswatini Mobile &mdash; e-Mali Secure Infrastructure</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --emali-red:#d90429;
+    --emali-red-2:#ef233c;
+    --emali-red-dark:#b5021f;
+    --ink:#222222;
+    --muted:#5b6470;
+    --line:#e6e9ee;
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --ok:#1f9d55;
+    --warn:#b8860b;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Roboto','Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.6;
+  }
+  h1,h2,h3,h4,.brand{font-family:'Poppins','Segoe UI',system-ui,sans-serif;letter-spacing:-.01em}
+
+  /* Top bar */
+  .topbar{
+    background:linear-gradient(90deg,var(--emali-red) 55%,var(--emali-red-2) 100%);
+    color:#fff;
+    font-size:.78rem;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    padding:.5rem 0;
+  }
+  .topbar .inner{max-width:1120px;margin:0 auto;padding:0 1.25rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .topbar strong{font-weight:600}
+
+  /* Nav */
+  nav{
+    background:linear-gradient(90deg,var(--emali-red) 55%,var(--emali-red-2) 100%);
+    color:#fff;
+    padding:1rem 0;
+    position:sticky;top:0;z-index:50;
+    box-shadow:0 6px 20px rgba(217,4,41,.25);
+  }
+  nav .inner{max-width:1120px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:.75rem;color:#fff;text-decoration:none;font-weight:700;font-size:1.25rem}
+  .brand .mark{
+    width:44px;height:44px;border-radius:12px;
+    background:#fff;color:var(--emali-red);
+    display:grid;place-items:center;font-weight:700;font-size:1.15rem;
+    box-shadow:0 2px 10px rgba(0,0,0,.18);
+  }
+  .brand small{display:block;font-family:'Roboto',sans-serif;font-weight:400;font-size:.68rem;letter-spacing:.14em;opacity:.9;text-transform:uppercase}
+  nav .links{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.92rem}
+  nav .links a{color:rgba(255,255,255,.92);text-decoration:none;font-weight:500}
+  nav .links a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+
+  /* Hero */
+  .hero{
+    background:
+      radial-gradient(1200px 400px at 85% -10%,rgba(239,35,60,.55),transparent 60%),
+      linear-gradient(135deg,var(--emali-red) 62%,var(--emali-red-2) 100%);
+    color:#fff;padding:5rem 1.25rem 4.5rem;text-align:center;
+  }
+  .hero .eyebrow{display:inline-block;border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:.3rem .9rem;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.25rem;font-weight:600}
+  .hero h1{font-size:clamp(2rem,5vw,3.25rem);margin:0 0 .6rem;font-weight:700}
+  .hero p{font-size:clamp(1rem,2vw,1.2rem);max-width:620px;margin:0 auto 1.75rem;opacity:.96}
+  .hero .cta{display:inline-flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+  .btn{
+    display:inline-block;padding:.8rem 1.6rem;border-radius:10px;font-weight:600;
+    text-decoration:none;font-family:'Poppins',sans-serif;font-size:.95rem;
+    transition:transform .15s,box-shadow .15s,background .15s;
+  }
+  .btn-light{background:#fff;color:var(--emali-red)}
+  .btn-light:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.22)}
+  .btn-ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.55)}
+  .btn-ghost:hover{background:rgba(255,255,255,.24);transform:translateY(-2px)}
+
+  /* Notice strip */
+  .notice{
+    background:#fff5f6;border-left:5px solid var(--emali-red);
+    max-width:1120px;margin:-2rem auto 0;position:relative;z-index:5;
+    padding:1rem 1.5rem;border-radius:12px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    font-size:.9rem;color:#7a1220;
+  }
+  .notice strong{color:var(--emali-red)}
+
+  /* Layout */
+  section{padding:3.5rem 1.25rem}
+  .wrap{max-width:1120px;margin:0 auto}
+  .section-head{text-align:center;margin-bottom:2.25rem}
+  .section-head h2{font-size:clamp(1.5rem,3vw,2.1rem);color:var(--emali-red);margin:0 0 .4rem}
+  .section-head p{color:var(--muted);margin:0 auto;max-width:640px}
+
+  .grid{display:grid;gap:1.25rem}
+  .grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:1.6rem;box-shadow:0 4px 16px rgba(15,23,42,.05);
+    transition:transform .18s,box-shadow .18s,border-color .18s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(217,4,41,.12);border-color:#f3c3cb}
+  .card .icon{
+    width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--emali-red),var(--emali-red-2));color:#fff;
+    font-size:1.35rem;margin-bottom:.9rem;
+  }
+  .card h3{margin:.1rem 0 .45rem;font-size:1.08rem;color:#111}
+  .card p{margin:0;color:var(--muted);font-size:.92rem}
+
+  /* Services list */
+  .svc{display:flex;align-items:center;gap:.85rem;padding:.75rem .2rem;border-bottom:1px dashed var(--line)}
+  .svc:last-child{border-bottom:none}
+  .svc .dot{width:10px;height:10px;border-radius:50%;background:var(--emali-red);flex:0 0 auto;box-shadow:0 0 0 4px rgba(217,4,41,.12)}
+  .svc span{font-weight:500}
+  .svc em{color:var(--muted);font-style:normal;font-size:.85rem;margin-left:auto}
+
+  /* Controls table */
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(15,23,42,.05);border:1px solid var(--line)}
+  th,td{padding:.8rem 1rem;text-align:left;font-size:.9rem;border-bottom:1px solid var(--line)}
+  th{background:#fff6f7;color:var(--emali-red);font-family:'Poppins',sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.02em;text-transform:uppercase}
+  tr:last-child td{border-bottom:none}
+  tr:hover td{background:#fafbfd}
+  .pill{display:inline-block;padding:.18rem .6rem;border-radius:999px;font-size:.74rem;font-weight:600}
+  .pill.ok{background:#e7f6ec;color:var(--ok)}
+  .pill.partial{background:#fbf3dd;color:var(--warn)}
+
+  /* Stack chips */
+  .chips{display:flex;flex-wrap:wrap;gap:.6rem}
+  .chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:.45rem .95rem;font-size:.85rem;font-weight:500;color:#333;box-shadow:0 2px 8px rgba(15,23,42,.04)}
+  .chip b{color:var(--emali-red);font-weight:600}
+
+  /* Footer */
+  footer{
+    background:linear-gradient(90deg,var(--emali-red) 55%,var(--emali-red-2) 100%);
+    color:#fff;padding:2.5rem 1.25rem 1.5rem;margin-top:1rem;
+  }
+  footer .inner{max-width:1120px;margin:0 auto;display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  footer h4{margin:0 0 .6rem;font-size:.95rem;letter-spacing:.03em}
+  footer p,footer li{font-size:.86rem;opacity:.94;margin:.2rem 0}
+  footer ul{list-style:none;padding:0;margin:0}
+  footer .fine{border-top:1px solid rgba(255,255,255,.28);margin-top:1.75rem;padding-top:1rem;text-align:center;font-size:.78rem;opacity:.9}
+  .sync{display:inline-block;width:8px;height:8px;border-radius:50%;background:#8ef0b0;margin-right:.4rem;box-shadow:0 0 0 4px rgba(142,240,176,.25)}
+
+  @media(max-width:640px){
+    nav .links{gap:1rem;font-size:.85rem}
+    .topbar .inner{justify-content:center;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="inner">
+      <span><strong>Eswatini Mobile</strong> &middot; e-Mali</span>
+      <span>Your one stop mobile wallet</span>
+    </div>
+  </div>
+
+  <nav>
+    <div class="inner">
+      <a class="brand" href="#">
+        <span class="mark">eM</span>
+        <span>e-Mali<small>Eswatini Mobile</small></span>
+      </a>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#security">Security</a>
+        <a href="#platform">Platform</a>
+        <a href="#status">Status</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">Academic Secure-Infrastructure Demonstration</span>
+    <h1>e-Mali Yakho</h1>
+    <p>Convenience at your fingertips &mdash; a mobile wallet platform engineered with hardened backups, least-privilege access and immutable vaults, built on a Linux laboratory host.</p>
+    <div class="cta">
+      <a class="btn btn-light" href="#security">View security controls</a>
+      <a class="btn btn-ghost" href="#services">Explore services</a>
+    </div>
+  </header>
+
+  <div class="notice">
+    <strong>SYNTHETIC-DEMO-ONLY.</strong> This portal is an academic infrastructure demonstration for the EswatiniMobile-E-mali programme. All identities, balances and transactions shown are synthetic; no live customer data is present.
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>e-Mali Services</h2>
+        <p>A complete mobile wallet &mdash; register free of charge and access every service by dialing <strong>*232#</strong>.</p>
+      </div>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Wallet capabilities</h3>
+          <div class="svc"><span class="dot"></span><span>Send &amp; receive money</span><em>*232#</em></div>
+          <div class="svc"><span class="dot"></span><span>Withdraw cash</span><em>Agent outlet</em></div>
+          <div class="svc"><span class="dot"></span><span>Buy airtime</span><em>Instant</em></div>
+          <div class="svc"><span class="dot"></span><span>Pay bills &amp; utilities</span><em>EEC &middot; EWSC &middot; TV</em></div>
+          <div class="svc"><span class="dot"></span><span>Deposit to bank account</span><em>EPS</em></div>
+          <div class="svc"><span class="dot"></span><span>Pay store &amp; merchant</span><em>Merchant code</em></div>
+        </div>
+        <div class="card">
+          <h3>Built for everyday use</h3>
+          <p style="margin-bottom:1rem">A wallet designed around how people actually manage money &mdash; simple, safe and available wherever you are.</p>
+          <div class="svc"><span class="dot"></span><span>Self-registration by USSD</span><em>*232#</em></div>
+          <div class="svc"><span class="dot"></span><span>4-digit PIN account security</span><em>Keep it secret</em></div>
+          <div class="svc"><span class="dot"></span><span>Support &amp; enquiries</span><em>Dial 980</em></div>
+          <div class="svc"><span class="dot"></span><span>Transaction limit</span><em>E4,000 / tx</em></div>
+          <div class="svc"><span class="dot"></span><span>Daily limit</span><em>E10,000 / day</em></div>
+          <div class="svc"><span class="dot"></span><span>Wallet balance cap</span><em>E50,000</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="security" style="background:#fff">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Security &amp; Hardening Controls</h2>
+        <p>The infrastructure layer beneath e-Mali &mdash; encryption, least privilege, immutable vaults and auditable operations.</p>
+      </div>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="icon">&#128274;</div>
+          <h3>Encrypted backups</h3>
+          <p>AES-256 encrypted archives with SHA-256 integrity manifests, generated by a hardened, fail-closed backup routine.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128737;</div>
+          <h3>Least privilege</h3>
+          <p>Administrative operations are restricted to the <strong>emaliadmins</strong> group through a curated sudoers policy.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128449;</div>
+          <h3>Immutable vault</h3>
+          <p>Archives are locked with the immutable attribute and pruned by a count-and-size retention policy. No silent overwrites.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128279;</div>
+          <h3>Transport security</h3>
+          <p>TLS setup for the portal with a staged certificate and key, keeping the delivery channel confidential in transit.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#128220;</div>
+          <h3>Auditable logs</h3>
+          <p>Rotated operational logs with a no-secrets scan, so activity is traceable without leaking sensitive values.</p>
+        </div>
+        <div class="card">
+          <div class="icon">&#9881;</div>
+          <h3>Verified restores</h3>
+          <p>Restore tests prove backups are usable &mdash; integrity is checked, not assumed, before any archive is trusted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platform">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Platform</h2>
+        <p>Hosted on a Kali/Debian Linux laboratory virtual machine, served by Apache under the <strong>emali</strong> virtual host.</p>
+      </div>
+      <div class="chips">
+        <span class="chip"><b>Host</b> Kali/Debian Linux VM</span>
+        <span class="chip"><b>Web</b> Apache2 &middot; vhost emali</span>
+        <span class="chip"><b>Vault</b> /backups/EswatiniMobile-E-mali</span>
+        <span class="chip"><b>Group</b> emaliadmins</span>
+        <span class="chip"><b>Crypto</b> AES-256 &middot; SHA-256</span>
+        <span class="chip"><b>Access</b> Dial *232#</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="status" style="background:#fff">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Control Status</h2>
+        <p>Honest reporting &mdash; controls that cannot be fully applied on a retired platform image are marked partial, never green.</p>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Control</th><th>Layer</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Encrypted backup &amp; manifest</td><td>Data</td><td><span class="pill ok">Verified</span></td></tr>
+          <tr><td>Immutable vault &amp; retention prune</td><td>Data</td><td><span class="pill ok">Verified</span></td></tr>
+          <tr><td>Least-privilege access policy</td><td>Access</td><td><span class="pill ok">Verified</span></td></tr>
+          <tr><td>Log rotation &amp; no-secrets scan</td><td>Operations</td><td><span class="pill ok">Verified</span></td></tr>
+          <tr><td>Portal TLS certificate</td><td>Transport</td><td><span class="pill ok">Verified</span></td></tr>
+          <tr><td>Host firewall (ufw)</td><td>Network</td><td><span class="pill partial">Partial &mdash; host EOL</span></td></tr>
+          <tr><td>Audit trail (auditd)</td><td>Operations</td><td><span class="pill partial">Partial &mdash; host EOL</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div class="inner">
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Dial 980 from an Eswatini Mobile number</li>
+          <li>Mkhonubovu Street, Checkers, Mbabane</li>
+        </ul>
+      </div>
+      <div>
+        <h4>e-Mali</h4>
+        <ul>
+          <li>Your one stop mobile wallet</li>
+          <li>Safe &middot; Simple &middot; Convenient</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Status</h4>
+        <p><span class="sync"></span>Portal online &middot; Apache vhost <em>emali</em></p>
+        <p>SYNTHETIC-DEMO-ONLY &middot; Academic</p>
+      </div>
+    </div>
+    <div class="fine">
+      &copy; 2026 Eswatini Mobile e-Mali &mdash; academic secure-infrastructure demonstration. Not a live financial service.
+    </div>
+  </footer>
+
+</body>
+</html>
